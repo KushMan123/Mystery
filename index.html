@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Be My Valentine 💖</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      padding: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 30px 20px;
+      border-radius: 20px;
+      text-align: center;
+      box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+      width: 100%;
+      max-width: 360px;
+    }
+
+    h1 {
+      color: #ff4d6d;
+      font-size: clamp(20px, 5vw, 26px);
+      margin-bottom: 15px;
+    }
+
+    .buttons {
+      margin-top: 25px;
+      position: relative;
+      height: 140px;
+    }
+
+    button {
+      padding: 12px 22px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s ease, background 0.3s ease;
+      position: absolute;
+      touch-action: manipulation;
+    }
+
+    #yesBtn {
+      background: #ff4d6d;
+      color: white;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    #yesBtn:active {
+      transform: translateX(-50%) scale(1.1);
+    }
+
+    #noBtn {
+      background: #e0e0e0;
+      color: #333;
+      left: 50%;
+      top: 70px;
+      transform: translateX(-50%);
+    }
+
+    .message {
+      display: none;
+      margin-top: 20px;
+      font-size: clamp(16px, 4vw, 18px);
+      color: #ff4d6d;
+    }
+
+    /* Small phones */
+    @media (max-width: 360px) {
+      .buttons {
+        height: 160px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card">
+    <h1>Will you be my Valentine? 💘</h1>
+
+    <div class="buttons">
+      <button id="yesBtn">Yes 💖</button>
+      <button id="noBtn">No 💔</button>
+    </div>
+
+    <div class="message" id="message">
+      Yayyy!! 💕 I knew you’d say yes 😘
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById("noBtn");
+    const yesBtn = document.getElementById("yesBtn");
+    const message = document.getElementById("message");
+    const container = document.querySelector(".buttons");
+
+    function moveNoButton() {
+      const containerRect = container.getBoundingClientRect();
+      const btnRect = noBtn.getBoundingClientRect();
+
+      const maxX = containerRect.width - btnRect.width;
+      const maxY = containerRect.height - btnRect.height;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      noBtn.style.transform = "none";
+    }
+
+    // For desktop
+    noBtn.addEventListener("mouseover", moveNoButton);
+
+    // For mobile (touch)
+    noBtn.addEventListener("touchstart", moveNoButton);
+
+    yesBtn.addEventListener("click", () => {
+      message.style.display = "block";
+      noBtn.style.display = "none";
+      yesBtn.style.display = "none";
+    });
+  </script>
+
+</body>
+</html>
